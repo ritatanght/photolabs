@@ -9,9 +9,10 @@ const sampleDataForTopicListItem = {
 };
 
 const TopicListItem = () => {
+  const { label } = sampleDataForTopicListItem;
   return (
     <div className="topic-list__item">
-      {/* Insert React */}
+      <span>{label}</span>
     </div>
   );
 };
