@@ -5,19 +5,18 @@ import "../styles/PhotoListItem.scss";
 const PhotoListItem = (props) => {
   const {
     location: { city, country },
-    imageSource,
-    username,
-    profile,
-  } = props.sampleDataForPhotoListItem;
+    urls: { regular },
+    user: { name, profile },
+  } = props;
 
   return (
-    <article className="photo-list__item">
+    <li className="photo-list__item">
       <PhotoFavButton />
-      <img src={imageSource} className="photo-list__image" />
+      <img src={regular} className="photo-list__image" />
       <footer className="photo-list__user-details">
         <img src={profile} className="photo-list__user-profile" />
         <div className="photo-list__user-info">
-          <span>{username}</span>
+          <span>{name}</span>
           <br />
           <span className="photo-list__user-location">
             {" "}
@@ -25,7 +24,7 @@ const PhotoListItem = (props) => {
           </span>
         </div>
       </footer>
-    </article>
+    </li>
   );
 };
 
