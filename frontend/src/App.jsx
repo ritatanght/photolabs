@@ -1,14 +1,16 @@
 import React from "react";
 
-//import PhotoListItem from "./components/PhotoListItem";
-import PhotoList from "components/PhotoList";
+import TopicList from "components/TopicList";
+//import PhotoList from "components/PhotoList";
+
 import "./App.scss";
 
 const App = () => {
   return (
     <div className="App">
-      {/* { Array.from(Array(3)).map((_, index) => <PhotoListItem key={index}/>) } */}
-      <PhotoList />
+      {/* <PhotoList /> */}
+      <TopicList />
+
     </div>
   );
 };
