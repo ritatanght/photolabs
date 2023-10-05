@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 import HomeRoute from "routes/HomeRoute";
 
 import "./App.scss";
+import PhotoDetailsModal from "routes/PhotoDetailsModal";
 
 const App = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div className="App">
-      <HomeRoute />
+      <HomeRoute setIsModalOpen={setIsModalOpen}/>
+      {isModalOpen && <PhotoDetailsModal />}
     </div>
   );
 };
