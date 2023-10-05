@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "../styles/PhotoDetailsModal.scss";
 import closeSymbol from "../assets/closeSymbol.svg";
 import PhotoFavButton from "components/PhotoFavButton";
 import PhotoList from "components/PhotoList";
 
-const PhotoDetailsModal = ({ photo, setModal }) => {
+const PhotoDetailsModal = (props) => {
+  const { photo, favPhotos, addFavPhoto, removeFavPhoto, setModal } = props;
   const {
+    id,
     location: { city, country },
     urls: { full },
     user: { name, profile },
     similar_photos,
   } = photo;
-  console.log(similar_photos);
+
+  const handleFavButtonClick = (photoObj) => {
+    // Run addFavPhoto to include the current photo when it is clicked if it's not yet in favPhotos
+    // Otherwise, run the removeFavPhoto to remove the current photo from favorited photos
+    favPhotos[id] ? removeFavPhoto(photoObj) : addFavPhoto(photoObj);
+  };
+
   return (
     <div className="photo-details-modal">
       <button
@@ -23,7 +31,10 @@ const PhotoDetailsModal = ({ photo, setModal }) => {
       </button>
       {/* Container for main large image */}
       <section className="photo-details-modal__images">
-        <PhotoFavButton />
+        <PhotoFavButton
+          handleFavButtonClick={() => handleFavButtonClick(photo)}
+          selected={!!favPhotos[id]}
+        />
         <img src={full} className="photo-details-modal__image" />
 
         <footer className="photo-details-modal__photographer-details">
@@ -46,7 +57,12 @@ const PhotoDetailsModal = ({ photo, setModal }) => {
       {/* Section for similar photos */}
       <section className="photo-details-modal__images">
         <h2 className="photo-details-modal__header">Similar Photos</h2>
-        <PhotoList photos={Object.values(similar_photos)} />
+        <PhotoList
+          photos={Object.values(similar_photos)}
+          favPhotos={favPhotos}
+          addFavPhoto={addFavPhoto}
+          removeFavPhoto={removeFavPhoto}
+        />
       </section>
     </div>
   );
