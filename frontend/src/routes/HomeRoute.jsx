@@ -3,7 +3,7 @@ import TopNavigationBar from "../components/TopNavigationBar";
 import PhotoList from "../components/PhotoList";
 import "../styles/HomeRoute.scss";
 
-const HomeRoute = () => {
+const HomeRoute = ({ setIsModalOpen }) => {
   const [favPhotos, setFavPhotos] = useState({});
 
   // Include the photo in favPhotos when it is favorited
@@ -22,7 +22,11 @@ const HomeRoute = () => {
   return (
     <div className="home-route">
       <TopNavigationBar isFavPhotoExist={Object.keys(favPhotos).length > 0} />
-      <PhotoList addFavPhoto={addFavPhoto} removeFavPhoto={removeFavPhoto} />
+      <PhotoList
+        addFavPhoto={addFavPhoto}
+        removeFavPhoto={removeFavPhoto}
+        setIsModalOpen={setIsModalOpen}
+      />
     </div>
   );
 };
