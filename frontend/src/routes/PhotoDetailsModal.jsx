@@ -3,14 +3,16 @@ import React, { useState } from "react";
 import "../styles/PhotoDetailsModal.scss";
 import closeSymbol from "../assets/closeSymbol.svg";
 import PhotoFavButton from "components/PhotoFavButton";
+import PhotoList from "components/PhotoList";
 
 const PhotoDetailsModal = ({ photo, setModal }) => {
   const {
     location: { city, country },
     urls: { full },
     user: { name, profile },
+    similar_photos,
   } = photo;
-
+  console.log(similar_photos);
   return (
     <div className="photo-details-modal">
       <button
@@ -44,6 +46,7 @@ const PhotoDetailsModal = ({ photo, setModal }) => {
       {/* Section for similar photos */}
       <section className="photo-details-modal__images">
         <h2 className="photo-details-modal__header">Similar Photos</h2>
+        <PhotoList photos={Object.values(similar_photos)} />
       </section>
     </div>
   );
