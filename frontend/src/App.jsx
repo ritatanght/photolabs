@@ -9,8 +9,8 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div className="App">
-      <HomeRoute setIsModalOpen={setIsModalOpen}/>
-      {isModalOpen && <PhotoDetailsModal />}
+      <HomeRoute setIsModalOpen={setIsModalOpen} />
+      {isModalOpen && <PhotoDetailsModal setIsModalOpen={setIsModalOpen} />}
     </div>
   );
 };
