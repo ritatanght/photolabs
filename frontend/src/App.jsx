@@ -48,8 +48,6 @@ const App = () => {
           photo={modalPhoto}
           setModal={setModalPhoto}
           favPhotos={favPhotos}
-          addFavPhoto={addFavPhoto}
-          removeFavPhoto={removeFavPhoto}
           handleFavButtonClick={handleFavButtonClick}
         />
       )}

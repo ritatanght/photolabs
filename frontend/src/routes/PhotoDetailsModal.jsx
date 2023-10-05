@@ -6,7 +6,7 @@ import PhotoFavButton from "components/PhotoFavButton";
 import PhotoList from "components/PhotoList";
 
 const PhotoDetailsModal = (props) => {
-  const { photo, favPhotos, addFavPhoto, removeFavPhoto, setModal } = props;
+  const { photo, favPhotos, handleFavButtonClick, setModal } = props;
   const {
     id,
     location: { city, country },
@@ -15,11 +15,6 @@ const PhotoDetailsModal = (props) => {
     similar_photos,
   } = photo;
 
-  const handleFavButtonClick = (photoId) => {
-    // Run addFavPhoto to include the current photo when it is clicked if it's not yet in favPhotos
-    // Otherwise, run the removeFavPhoto to remove the current photo from favorited photos
-    favPhotos[photoId] ? removeFavPhoto(photoId) : addFavPhoto(photoId);
-  };
 
   return (
     <div className="photo-details-modal">
@@ -60,8 +55,7 @@ const PhotoDetailsModal = (props) => {
         <PhotoList
           photos={Object.values(similar_photos)}
           favPhotos={favPhotos}
-          addFavPhoto={addFavPhoto}
-          removeFavPhoto={removeFavPhoto}
+          handleFavButtonClick={handleFavButtonClick}
         />
       </section>
     </div>
