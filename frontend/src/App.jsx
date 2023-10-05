@@ -7,18 +7,22 @@ import "./App.scss";
 
 const App = () => {
   const [modalPhoto, setModalPhoto] = useState(null); // modal with a photo key will show the photo
-  const [favPhotos, setFavPhotos] = useState({});
+  const [favPhotos, setFavPhotos] = useState([]);
 
   // Include the photo in favPhotos when it is favorited
-  const addFavPhoto = (photo) => {
-    setFavPhotos((prev) => ({ ...prev, [photo.id]: { photo } }));
+  const addFavPhoto = (photoId) => {
+    setFavPhotos((prev) => {
+      if (!prev.includes(photoId)) {
+        return [...prev, photoId];
+      }
+    });
   };
 
   // Remove a photo from favPhotos when it is unfavorited
-  const removeFavPhoto = (photo) => {
+  const removeFavPhoto = (photoId) => {
     setFavPhotos((prev) => {
-      const { [photo.id]: removed, ...remain } = prev;
-      return remain;
+      const index = prev.indexOf(photoId);
+      return index >= 0 ? prev.splice(index, 1) : prev;
     });
   };
 

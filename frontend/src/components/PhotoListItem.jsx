@@ -11,16 +11,18 @@ const PhotoListItem = (props) => {
     user: { name, profile },
   } = photo;
 
-  const handleFavButtonClick = (photoObj) => {
+  const handleFavButtonClick = (photoId) => {
     // Run addFavPhoto to include the current photo when it is clicked if it's not yet in favPhotos
     // Otherwise, run the removeFavPhoto to remove the current photo from favorited photos
-    favPhotos[id] ? removeFavPhoto(photoObj) : addFavPhoto(photoObj);
+    favPhotos.includes(photoId)
+      ? removeFavPhoto(photoId)
+      : addFavPhoto(photoId);
   };
   return (
     <li className="photo-list__item">
       <PhotoFavButton
-        handleFavButtonClick={() => handleFavButtonClick(photo)}
-        selected={!!favPhotos[id]}
+        handleFavButtonClick={() => handleFavButtonClick(id)}
+        selected={!!favPhotos.includes(id)}
       />
       <img
         src={regular}

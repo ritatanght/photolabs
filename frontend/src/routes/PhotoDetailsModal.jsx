@@ -15,10 +15,10 @@ const PhotoDetailsModal = (props) => {
     similar_photos,
   } = photo;
 
-  const handleFavButtonClick = (photoObj) => {
+  const handleFavButtonClick = (photoId) => {
     // Run addFavPhoto to include the current photo when it is clicked if it's not yet in favPhotos
     // Otherwise, run the removeFavPhoto to remove the current photo from favorited photos
-    favPhotos[id] ? removeFavPhoto(photoObj) : addFavPhoto(photoObj);
+    favPhotos[photoId] ? removeFavPhoto(photoId) : addFavPhoto(photoId);
   };
 
   return (
@@ -32,8 +32,8 @@ const PhotoDetailsModal = (props) => {
       {/* Container for main large image */}
       <section className="photo-details-modal__images">
         <PhotoFavButton
-          handleFavButtonClick={() => handleFavButtonClick(photo)}
-          selected={!!favPhotos[id]}
+          handleFavButtonClick={() => handleFavButtonClick(id)}
+          selected={!!favPhotos.includes(id)}
         />
         <img src={full} className="photo-details-modal__image" />
 
