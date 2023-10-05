@@ -12,7 +12,7 @@ const PhotoListItem = (props) => {
     },
     addFavPhoto,
     removeFavPhoto,
-    setIsModalOpen,
+    setModal,
   } = props;
 
   const handleFavButtonClick = (photoObj) => {
@@ -32,7 +32,7 @@ const PhotoListItem = (props) => {
       <img
         src={regular}
         className="photo-list__image"
-        onClick={() => setIsModalOpen(true)}
+        onClick={() => setModal({ isOpen: true, photo: props.photo })}
       />
       <footer className="photo-list__user-details">
         <img src={profile} className="photo-list__user-profile" />

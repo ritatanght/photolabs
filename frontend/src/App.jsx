@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 
 import HomeRoute from "routes/HomeRoute";
-
-import "./App.scss";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
 
+import "./App.scss";
+
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modal, setModal] = useState({ isOpen: false });
+
   return (
     <div className="App">
-      <HomeRoute setIsModalOpen={setIsModalOpen} />
-      {isModalOpen && <PhotoDetailsModal setIsModalOpen={setIsModalOpen} />}
+      <HomeRoute setModal={setModal} />
+      {modal.isOpen && (
+        <PhotoDetailsModal photo={modal.photo} setModal={setModal} />
+      )}
     </div>
   );
 };
