@@ -1,19 +1,23 @@
 import React from "react";
 import TopNavigationBar from "../components/TopNavigationBar";
 import PhotoList from "../components/PhotoList";
+import photosData from "../mocks/photos";
 import "../styles/HomeRoute.scss";
 
 const HomeRoute = (props) => {
-  const { favPhotos, addFavPhoto, removeFavPhoto, setModal } = props;
+  //const { favPhotos, handleFavButtonClick, setModal } = props;
 
   return (
     <div className="home-route">
-      <TopNavigationBar isFavPhotoExist={favPhotos.length > 0} />
+      <TopNavigationBar isFavPhotoExist={props.favPhotos.length > 0} />
       <PhotoList
-        favPhotos={favPhotos}
-        addFavPhoto={addFavPhoto}
-        removeFavPhoto={removeFavPhoto}
-        setModal={setModal}
+        photos={photosData}
+        // favPhotos={favPhotos}
+        // addFavPhoto={addFavPhoto}
+        // removeFavPhoto={removeFavPhoto}
+        // setModal={setModal}
+        // handleFavButtonClick={handleFavButtonClick}
+        {...props}
       />
     </div>
   );

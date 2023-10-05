@@ -26,13 +26,22 @@ const App = () => {
     });
   };
 
+  const handleFavButtonClick = (photoId) => {
+    // Run addFavPhoto to include the current photo when it is clicked if it's not yet in favPhotos
+    // Otherwise, run the removeFavPhoto to remove the current photo from favorited photos
+    favPhotos.includes(photoId)
+      ? removeFavPhoto(photoId)
+      : addFavPhoto(photoId);
+  };
+
   return (
     <div className="App">
       <HomeRoute
         setModal={setModalPhoto}
         favPhotos={favPhotos}
-        addFavPhoto={addFavPhoto}
-        removeFavPhoto={removeFavPhoto}
+        // addFavPhoto={addFavPhoto}
+        // removeFavPhoto={removeFavPhoto}
+        handleFavButtonClick={handleFavButtonClick}
       />
       {modalPhoto && (
         <PhotoDetailsModal
@@ -41,6 +50,7 @@ const App = () => {
           favPhotos={favPhotos}
           addFavPhoto={addFavPhoto}
           removeFavPhoto={removeFavPhoto}
+          handleFavButtonClick={handleFavButtonClick}
         />
       )}
     </div>

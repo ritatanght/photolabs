@@ -3,26 +3,18 @@ import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = (props) => {
-  const { photo, favPhotos, addFavPhoto, removeFavPhoto, setModal } = props;
+  const { photo, isFav, setModal, handleFavButtonClick } = props;
   const {
-    id,
     location: { city, country },
     urls: { regular },
     user: { name, profile },
   } = photo;
 
-  const handleFavButtonClick = (photoId) => {
-    // Run addFavPhoto to include the current photo when it is clicked if it's not yet in favPhotos
-    // Otherwise, run the removeFavPhoto to remove the current photo from favorited photos
-    favPhotos.includes(photoId)
-      ? removeFavPhoto(photoId)
-      : addFavPhoto(photoId);
-  };
   return (
     <li className="photo-list__item">
       <PhotoFavButton
-        handleFavButtonClick={() => handleFavButtonClick(id)}
-        selected={!!favPhotos.includes(id)}
+        handleFavButtonClick={handleFavButtonClick}
+        selected={isFav}
       />
       <img
         src={regular}
