@@ -14,8 +14,8 @@ const HomeRoute = () => {
   // Remove a photo from favPhotos when it is unfavorited
   const removeFavPhoto = (photo) => {
     setFavPhotos((prev) => {
-      delete prev[photo.id];
-      return prev;
+      const { [photo.id]: removed, ...remain } = prev;
+      return remain;
     });
   };
 
