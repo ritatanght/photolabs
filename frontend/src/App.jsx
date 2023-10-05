@@ -6,7 +6,7 @@ import PhotoDetailsModal from "routes/PhotoDetailsModal";
 import "./App.scss";
 
 const App = () => {
-  const [modal, setModal] = useState({ isOpen: false });
+  const [modalPhoto, setModalPhoto] = useState(null); // modal with a photo key will show the photo
   const [favPhotos, setFavPhotos] = useState({});
 
   // Include the photo in favPhotos when it is favorited
@@ -25,15 +25,15 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute
-        setModal={setModal}
+        setModal={setModalPhoto}
         favPhotos={favPhotos}
         addFavPhoto={addFavPhoto}
         removeFavPhoto={removeFavPhoto}
       />
-      {modal.isOpen && (
+      {modalPhoto && (
         <PhotoDetailsModal
-          photo={modal.photo}
-          setModal={setModal}
+          photo={modalPhoto}
+          setModal={setModalPhoto}
           favPhotos={favPhotos}
           addFavPhoto={addFavPhoto}
           removeFavPhoto={removeFavPhoto}

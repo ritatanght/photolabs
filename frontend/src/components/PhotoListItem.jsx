@@ -15,18 +15,17 @@ const PhotoListItem = (props) => {
     // Run addFavPhoto to include the current photo when it is clicked if it's not yet in favPhotos
     // Otherwise, run the removeFavPhoto to remove the current photo from favorited photos
     favPhotos[id] ? removeFavPhoto(photoObj) : addFavPhoto(photoObj);
-
   };
   return (
     <li className="photo-list__item">
       <PhotoFavButton
-        handleFavButtonClick={() => handleFavButtonClick(props.photo)}
+        handleFavButtonClick={() => handleFavButtonClick(photo)}
         selected={!!favPhotos[id]}
       />
       <img
         src={regular}
         className="photo-list__image"
-        onClick={() => setModal({ isOpen: true, photo: props.photo })}
+        onClick={() => setModal(photo)}
       />
       <footer className="photo-list__user-details">
         <img src={profile} className="photo-list__user-profile" />
