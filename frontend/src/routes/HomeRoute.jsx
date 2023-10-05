@@ -21,7 +21,7 @@ const HomeRoute = () => {
 
   return (
     <div className="home-route">
-      <TopNavigationBar />
+      <TopNavigationBar isFavPhotoExist={Object.keys(favPhotos).length > 0} />
       <PhotoList addFavPhoto={addFavPhoto} removeFavPhoto={removeFavPhoto} />
     </div>
   );
