@@ -28,10 +28,15 @@ const useApplicationData = () => {
       : addFavPhoto(photoId);
   };
 
+  const onClosePhotoDetailsModal = () => {
+    setModalPhoto(null);
+  };
+
   return {
     state: { modalPhoto, favPhotos },
     setModalPhoto,
     handleFavButtonClick,
+    onClosePhotoDetailsModal,
   };
 };
 

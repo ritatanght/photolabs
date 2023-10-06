@@ -9,20 +9,22 @@ const App = () => {
   const {
     state: { favPhotos, modalPhoto },
     setModalPhoto,
+    onClosePhotoDetailsModal,
     handleFavButtonClick,
+
   } = useApplicationData();
 
   return (
     <div className="App">
       <HomeRoute
-        setModal={setModalPhoto}
+        setModalPhoto={setModalPhoto}
         favPhotos={favPhotos}
         handleFavButtonClick={handleFavButtonClick}
       />
       {modalPhoto && (
         <PhotoDetailsModal
           photo={modalPhoto}
-          setModal={setModalPhoto}
+          onClosePhotoDetailsModal={onClosePhotoDetailsModal}
           favPhotos={favPhotos}
           handleFavButtonClick={handleFavButtonClick}
         />
