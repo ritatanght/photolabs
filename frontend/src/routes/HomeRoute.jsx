@@ -5,20 +5,10 @@ import photosData from "../mocks/photos";
 import "../styles/HomeRoute.scss";
 
 const HomeRoute = (props) => {
-  //const { favPhotos, handleFavButtonClick, setModal } = props;
-
   return (
     <div className="home-route">
       <TopNavigationBar isFavPhotoExist={props.favPhotos.length > 0} />
-      <PhotoList
-        photos={photosData}
-        // favPhotos={favPhotos}
-        // addFavPhoto={addFavPhoto}
-        // removeFavPhoto={removeFavPhoto}
-        // setModal={setModal}
-        // handleFavButtonClick={handleFavButtonClick}
-        {...props}
-      />
+      <PhotoList photos={photosData} {...props} />
     </div>
   );
 };

@@ -15,7 +15,6 @@ const PhotoDetailsModal = (props) => {
     similar_photos,
   } = photo;
 
-
   return (
     <div className="photo-details-modal">
       <button
@@ -40,10 +39,7 @@ const PhotoDetailsModal = (props) => {
           <div className="photo-details-modal__photographer-info">
             <span>{name}</span>
             <br />
-            <span
-              className="photo-details-modal__photographer-location {
-                "
-            >
+            <span className="photo-details-modal__photographer-location">
               {`${city}, ${country}`}
             </span>
           </div>

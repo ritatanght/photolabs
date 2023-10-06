@@ -39,8 +39,6 @@ const App = () => {
       <HomeRoute
         setModal={setModalPhoto}
         favPhotos={favPhotos}
-        // addFavPhoto={addFavPhoto}
-        // removeFavPhoto={removeFavPhoto}
         handleFavButtonClick={handleFavButtonClick}
       />
       {modalPhoto && (
