@@ -7,10 +7,6 @@ import "./App.scss";
 
 const App = () => {
   const {
-    // state: { favPhotos, modalPhoto },
-    // setModalPhoto,
-    // onClosePhotoDetailsModal,
-    // handleFavButtonClick,
     state: { favPhotos, modalPhoto },
     dispatch,
   } = useApplicationData();
@@ -22,7 +18,6 @@ const App = () => {
           dispatch({ type: "SELECT_PHOTO", payload: photo })
         }
         favPhotos={favPhotos}
-        //handleFavButtonClick={handleFavButtonClick}
         addFavPhoto={(photoId) =>
           dispatch({ type: "FAV_PHOTO_ADDED", payload: photoId })
         }
@@ -41,7 +36,6 @@ const App = () => {
           removeFavPhoto={(photoId) =>
             dispatch({ type: "FAV_PHOTO_REMOVED", payload: photoId })
           }
-          //handleFavButtonClick={handleFavButtonClick}
         />
       )}
     </div>

@@ -9,7 +9,6 @@ const PhotoList = (props) => {
     <PhotoListItem
       key={photo.id}
       photo={photo}
-      //handleFavButtonClick={() => handleFavButtonClick(photo.id)}
       isFav={!!favPhotos.includes(photo.id)}
       {...otherProps}
     />
