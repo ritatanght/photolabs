@@ -3,7 +3,7 @@ import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = (props) => {
-  const { photo, isFav, setModal, handleFavButtonClick } = props;
+  const { photo, isFav, setModalPhoto, handleFavButtonClick } = props;
   const {
     location: { city, country },
     urls: { regular },
@@ -19,7 +19,7 @@ const PhotoListItem = (props) => {
       <img
         src={regular}
         className="photo-list__image"
-        onClick={() => setModal(photo)}
+        onClick={() => setModalPhoto(photo)}
       />
       <footer className="photo-list__user-details">
         <img src={profile} className="photo-list__user-profile" />
