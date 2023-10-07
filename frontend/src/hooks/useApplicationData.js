@@ -12,22 +12,26 @@ export const ACTIONS = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-  case "FAV_PHOTO_ADDED":
+  case "FAV_PHOTO_ADDED": {
+    const { favPhotos } = state;
     // include the photo in favPhoto only when the current photo is not in favPhoto
-    if (!state.favPhotos.includes(action.payload)) {
-      return { ...state, favPhotos: [...state.favPhotos, action.payload] };
-    }
-    return state;
-
-  case "FAV_PHOTO_REMOVED": {
-    // look for the index for the current photo
-    const index = state.favPhotos.indexOf(action.payload);
-    if (index >= 0) {
-      return { ...state, favPhotos: state.favPhotos.splice(index, 1) };
+    if (!favPhotos.includes(action.payload)) {
+      return { ...state, favPhotos: [...favPhotos, action.payload] };
     }
     return state;
   }
 
+  case "FAV_PHOTO_REMOVED": {
+    const { favPhotos } = state;
+    // look for the index for the current photo
+    const index = favPhotos.indexOf(action.payload);
+    if (index >= 0) {
+      return { ...state, favPhotos: favPhotos.splice(index, 1) };
+    }
+    return state;
+  }
+
+  // both actions set fetched data to photoData for display
   case "SET_PHOTO_DATA":
   case "GET_PHOTOS_BY_TOPICS":
     return { ...state, photoData: action.payload };
@@ -50,33 +54,39 @@ const reducer = (state, action) => {
 
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, {
-    favPhotos: [],
-    modalPhoto: null,
-    photoData: [],
-    topicData: [],
+    modalPhoto: null, // photoObj || null
+    favPhotos: [], // photoId []
+    photoData: [], // photoObj[]
+    topicData: [], // topicObj[]
   });
 
+  // take care of the data fetching of photos and topics upon initial render of app
   useEffect(() => {
     const photoPromise = axios.get("/api/photos");
     const topicPromise = axios.get("/api/topics");
 
+    // set the returned data to photoData and topic data in reducer
     Promise.all([photoPromise, topicPromise])
-      .then(([photoData, topicData]) => {
-        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoData.data });
-        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topicData.data });
+      .then(([photoRes, topicRes]) => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoRes.data });
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topicRes.data });
       })
       .catch((error) => console.log(error));
   }, []);
 
-  const addFavPhoto = (photoId) =>
-    dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: photoId });
-    
+  const addFavPhoto = (photoId) => {
+    const validPhoto = state.photoData.some((photo) => photo.id === photoId);
+    if (validPhoto)
+      return dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: photoId });
+  };
+
   const removeFavPhoto = (photoId) =>
     dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: photoId });
 
   const setModalPhoto = (photo) =>
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photo });
 
+  // set modalPhoto to null when modal is closed
   const onClosePhotoDetailsModal = () =>
     dispatch({ type: ACTIONS.SELECT_PHOTO });
 
@@ -86,7 +96,7 @@ const useApplicationData = () => {
    */
   const fetchPhotosByTopic = (topicId) => {
     return axios
-      .get(`api/topics/photos/${topicId}`)
+      .get(`/api/topics/photos/${topicId}`)
       .then(({ data }) =>
         dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: data })
       )

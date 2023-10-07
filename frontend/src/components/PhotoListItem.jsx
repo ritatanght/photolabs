@@ -22,7 +22,8 @@ const PhotoListItem = (props) => {
       <img
         src={regular}
         className="photo-list__image"
-        onClick={() => setModalPhoto(photo)}
+        // only have an onClick handler when setModalPhoto is in props (on home route)
+        onClick={() => !!setModalPhoto && setModalPhoto(photo)}
       />
       <footer className="photo-list__user-details">
         <img src={profile} className="photo-list__user-profile" />
