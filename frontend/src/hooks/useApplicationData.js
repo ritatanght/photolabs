@@ -1,6 +1,14 @@
-import { useReducer } from "react";
-import photos from "../mocks/photos";
+import { useEffect, useReducer } from "react";
 import topics from "../mocks/topics";
+
+export const ACTIONS = {
+  FAV_PHOTO_ADDED: "FAV_PHOTO_ADDED",
+  FAV_PHOTO_REMOVED: "FAV_PHOTO_REMOVED",
+  SET_PHOTO_DATA: "SET_PHOTO_DATA",
+  SET_TOPIC_DATA: "SET_TOPIC_DATA",
+  SELECT_PHOTO: "SELECT_PHOTO",
+  DISPLAY_PHOTO_DETAILS: "DISPLAY_PHOTO_DETAILS",
+};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -46,6 +54,15 @@ const useApplicationData = () => {
     photoData: [],
     topicData: [],
   });
+
+  useEffect(() => {
+    fetch("/api/photos")
+      .then((res) => res.json())
+      .then((data) =>
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data })
+      );
+
+  }, []);
 
   return {
     state,
