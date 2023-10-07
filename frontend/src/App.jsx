@@ -1,7 +1,8 @@
 import React from "react";
 import HomeRoute from "routes/HomeRoute";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
-import useApplicationData from './hooks/useApplicationData';
+import useApplicationData from "./hooks/useApplicationData";
+import photos from "./mocks/photos";
 
 import "./App.scss";
 
@@ -14,6 +15,7 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute
+        photos={photos}
         setModalPhoto={(photo) =>
           dispatch({ type: "SELECT_PHOTO", payload: photo })
         }
