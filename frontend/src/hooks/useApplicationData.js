@@ -68,8 +68,24 @@ const useApplicationData = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  const addFavPhoto = (photoId) =>
+    dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: photoId });
+    
+  const removeFavPhoto = (photoId) =>
+    dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: photoId });
+
+  const setModalPhoto = (photo) =>
+    dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photo });
+
+  const onClosePhotoDetailsModal = () =>
+    dispatch({ type: ACTIONS.SELECT_PHOTO });
+
+  /**
+   * Takes in topic id, fetch the photos with the topic id and set the returned data to photoData in reducer
+   * @param {string} topicId
+   */
   const fetchPhotosByTopic = (topicId) => {
-    axios
+    return axios
       .get(`api/topics/photos/${topicId}`)
       .then(({ data }) =>
         dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: data })
@@ -79,7 +95,10 @@ const useApplicationData = () => {
 
   return {
     state,
-    dispatch,
+    addFavPhoto,
+    removeFavPhoto,
+    setModalPhoto,
+    onClosePhotoDetailsModal,
     fetchPhotosByTopic,
   };
 };
