@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from "react";
+import axios from "axios";
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: "FAV_PHOTO_ADDED",
@@ -6,7 +7,7 @@ export const ACTIONS = {
   SET_PHOTO_DATA: "SET_PHOTO_DATA",
   SET_TOPIC_DATA: "SET_TOPIC_DATA",
   SELECT_PHOTO: "SELECT_PHOTO",
-  GET_PHOTOS_BY_TOPICS:"GET_PHOTOS_BY_TOPICS",
+  GET_PHOTOS_BY_TOPICS: "GET_PHOTOS_BY_TOPICS",
 };
 
 const reducer = (state, action) => {
@@ -55,26 +56,25 @@ const useApplicationData = () => {
     topicData: [],
   });
 
-
   useEffect(() => {
-    fetch("/api/photos")
-      .then((res) => res.json())
-      .then((data) =>
-        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data })
-      );
-    fetch("/api/topics")
-      .then((res) => res.json())
-      .then((data) =>
-        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data })
-      );
+    const photoPromise = axios.get("/api/photos");
+    const topicPromise = axios.get("/api/topics");
+
+    Promise.all([photoPromise, topicPromise])
+      .then(([photoData, topicData]) => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photoData.data });
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topicData.data });
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   const fetchPhotosByTopic = (topicId) => {
-    fetch(`api/topics/photos/${topicId}`)
-      .then((res) => res.json())
-      .then((photos) =>
-        dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: photos })
-      );
+    axios
+      .get(`api/topics/photos/${topicId}`)
+      .then(({ data }) =>
+        dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: data })
+      )
+      .catch((error) => console.log(error));
   };
 
   return {
