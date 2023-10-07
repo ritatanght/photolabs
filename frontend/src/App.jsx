@@ -9,6 +9,7 @@ const App = () => {
   const {
     state: { photoData, topicData, favPhotos, modalPhoto },
     dispatch,
+    fetchPhotosByTopic,
   } = useApplicationData();
 
   return (
@@ -16,10 +17,11 @@ const App = () => {
       <HomeRoute
         photos={photoData}
         topics={topicData}
+        favPhotos={favPhotos}
+        fetchPhotosByTopic={fetchPhotosByTopic}
         setModalPhoto={(photo) =>
           dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photo })
         }
-        favPhotos={favPhotos}
         addFavPhoto={(photoId) =>
           dispatch({ type: ACTIONS.FAV_PHOTO_ADDED, payload: photoId })
         }

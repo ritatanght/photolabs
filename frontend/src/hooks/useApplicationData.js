@@ -6,7 +6,7 @@ export const ACTIONS = {
   SET_PHOTO_DATA: "SET_PHOTO_DATA",
   SET_TOPIC_DATA: "SET_TOPIC_DATA",
   SELECT_PHOTO: "SELECT_PHOTO",
-  DISPLAY_PHOTO_DETAILS: "DISPLAY_PHOTO_DETAILS",
+  GET_PHOTOS_BY_TOPICS:"GET_PHOTOS_BY_TOPICS",
 };
 
 const reducer = (state, action) => {
@@ -28,6 +28,7 @@ const reducer = (state, action) => {
   }
 
   case "SET_PHOTO_DATA":
+  case "GET_PHOTOS_BY_TOPICS":
     return { ...state, photoData: action.payload };
 
   case "SET_TOPIC_DATA":
@@ -54,6 +55,7 @@ const useApplicationData = () => {
     topicData: [],
   });
 
+
   useEffect(() => {
     fetch("/api/photos")
       .then((res) => res.json())
@@ -67,9 +69,18 @@ const useApplicationData = () => {
       );
   }, []);
 
+  const fetchPhotosByTopic = (topicId) => {
+    fetch(`api/topics/photos/${topicId}`)
+      .then((res) => res.json())
+      .then((photos) =>
+        dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: photos })
+      );
+  };
+
   return {
     state,
     dispatch,
+    fetchPhotosByTopic,
   };
 };
 
