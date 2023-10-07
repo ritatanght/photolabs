@@ -3,6 +3,7 @@ import HomeRoute from "routes/HomeRoute";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
 import useApplicationData from "./hooks/useApplicationData";
 import photos from "./mocks/photos";
+import topics from "mocks/topics";
 
 import "./App.scss";
 
@@ -16,6 +17,7 @@ const App = () => {
     <div className="App">
       <HomeRoute
         photos={photos}
+        topics={topics}
         setModalPhoto={(photo) =>
           dispatch({ type: "SELECT_PHOTO", payload: photo })
         }

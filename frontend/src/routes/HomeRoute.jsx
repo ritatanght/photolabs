@@ -4,10 +4,14 @@ import PhotoList from "../components/PhotoList";
 import "../styles/HomeRoute.scss";
 
 const HomeRoute = (props) => {
+  const { topics, ...otherProps } = props;
   return (
     <div className="home-route">
-      <TopNavigationBar isFavPhotoExist={props.favPhotos.length > 0} />
-      <PhotoList {...props} />
+      <TopNavigationBar
+        topics={topics}
+        isFavPhotoExist={props.favPhotos.length > 0}
+      />
+      <PhotoList {...otherProps} />
     </div>
   );
 };
