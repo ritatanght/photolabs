@@ -4,9 +4,9 @@ import PhotoList from "../components/PhotoList";
 import "../styles/HomeRoute.scss";
 
 const HomeRoute = (props) => {
-  const { topics, fetchPhotosByTopic, ...otherProps } = props;
+  const { topics, fetchPhotosByTopic, isModalOpen, ...otherProps } = props;
   return (
-    <div className="home-route">
+    <div className={`home-route ${isModalOpen ? "disabled" : ""}`}>
       <TopNavigationBar
         topics={topics}
         fetchPhotosByTopic={fetchPhotosByTopic}

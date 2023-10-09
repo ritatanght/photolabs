@@ -21,6 +21,7 @@ const App = () => {
         photos={photoData}
         topics={topicData}
         favPhotos={favPhotos}
+        isModalOpen={!!modalPhoto}
         fetchPhotosByTopic={fetchPhotosByTopic}
         setModalPhoto={setModalPhoto}
         addFavPhoto={addFavPhoto}
