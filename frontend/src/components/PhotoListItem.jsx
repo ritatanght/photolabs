@@ -21,7 +21,8 @@ const PhotoListItem = (props) => {
       />
       <img
         src={regular}
-        className="photo-list__image"
+        // thumbnail should be clickable when the setModalPhoto func is passed down
+        className={`photo-list__image ${setModalPhoto ? "clickable" : ""}`}
         // only have an onClick handler when setModalPhoto is in props (on home route)
         onClick={() => !!setModalPhoto && setModalPhoto(photo)}
       />
