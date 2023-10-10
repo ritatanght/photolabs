@@ -9,8 +9,7 @@ const PhotoDetailsModal = (props) => {
   const {
     photo,
     favPhotos,
-    addFavPhoto,
-    removeFavPhoto,
+    toggleFavPhoto,
     onClosePhotoDetailsModal,
   } = props;
   const {
@@ -21,11 +20,7 @@ const PhotoDetailsModal = (props) => {
     similar_photos,
   } = photo;
 
-  const handleFavButtonClick = (photoId) => {
-    return favPhotos.includes(photoId)
-      ? removeFavPhoto(photoId)
-      : addFavPhoto(photoId);
-  };
+  const isFav = favPhotos.includes(id);
 
   return (
     <div className="photo-details-modal">
@@ -38,8 +33,8 @@ const PhotoDetailsModal = (props) => {
       {/* Container for main large image */}
       <section className="photo-details-modal__images">
         <PhotoFavButton
-          handleFavButtonClick={() => handleFavButtonClick(id)}
-          selected={!!favPhotos.includes(id)}
+          handleFavButtonClick={() => toggleFavPhoto(isFav, id)}
+          selected={!!isFav}
         />
         <img src={full} className="photo-details-modal__image" />
 
@@ -63,8 +58,7 @@ const PhotoDetailsModal = (props) => {
         <PhotoList
           photos={Object.values(similar_photos)}
           favPhotos={favPhotos}
-          addFavPhoto={addFavPhoto}
-          removeFavPhoto={removeFavPhoto}
+          toggleFavPhoto={toggleFavPhoto}
         />
       </section>
     </div>

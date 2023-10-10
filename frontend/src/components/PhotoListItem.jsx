@@ -3,7 +3,12 @@ import PhotoFavButton from "./PhotoFavButton";
 import "../styles/PhotoListItem.scss";
 
 const PhotoListItem = (props) => {
-  const { photo, isFav, setModalPhoto, addFavPhoto, removeFavPhoto } = props;
+  const {
+    photo,
+    isFav,
+    setModalPhoto,
+    toggleFavPhoto,
+  } = props;
   const {
     id,
     location: { city, country },
@@ -14,8 +19,7 @@ const PhotoListItem = (props) => {
   return (
     <li className="photo-list__item">
       <PhotoFavButton
-        handleFavButtonClick={() =>
-          isFav ? removeFavPhoto(id) : addFavPhoto(id)
+        handleFavButtonClick={() => toggleFavPhoto(isFav, id)
         }
         selected={isFav}
       />

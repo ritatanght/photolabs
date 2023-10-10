@@ -55,7 +55,7 @@ const reducer = (state, action) => {
 const useApplicationData = () => {
   const [state, dispatch] = useReducer(reducer, {
     modalPhoto: null, // photoObj || null
-    favPhotos: [], // photoId []
+    favPhotos: [], // photoId[]
     photoData: [], // photoObj[]
     topicData: [], // topicObj[]
   });
@@ -83,6 +83,10 @@ const useApplicationData = () => {
   const removeFavPhoto = (photoId) =>
     dispatch({ type: ACTIONS.FAV_PHOTO_REMOVED, payload: photoId });
 
+  // call the corresponding functions depending on whether the current photo has been favorited
+  const toggleFavPhoto = (isFavorited, photoId) =>
+    isFavorited ? removeFavPhoto(photoId) : addFavPhoto(photoId);
+
   const setModalPhoto = (photo) =>
     dispatch({ type: ACTIONS.SELECT_PHOTO, payload: photo });
 
@@ -105,8 +109,7 @@ const useApplicationData = () => {
 
   return {
     state,
-    addFavPhoto,
-    removeFavPhoto,
+    toggleFavPhoto,
     setModalPhoto,
     onClosePhotoDetailsModal,
     fetchPhotosByTopic,

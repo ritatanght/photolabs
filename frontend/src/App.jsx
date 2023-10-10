@@ -8,8 +8,7 @@ import "./App.scss";
 const App = () => {
   const {
     state: { photoData, topicData, favPhotos, modalPhoto },
-    addFavPhoto,
-    removeFavPhoto,
+    toggleFavPhoto,
     setModalPhoto,
     fetchPhotosByTopic,
     onClosePhotoDetailsModal,
@@ -24,16 +23,14 @@ const App = () => {
         isModalOpen={!!modalPhoto}
         fetchPhotosByTopic={fetchPhotosByTopic}
         setModalPhoto={setModalPhoto}
-        addFavPhoto={addFavPhoto}
-        removeFavPhoto={removeFavPhoto}
+        toggleFavPhoto={toggleFavPhoto}
       />
       {modalPhoto && (
         <PhotoDetailsModal
           photo={modalPhoto}
           favPhotos={favPhotos}
           onClosePhotoDetailsModal={onClosePhotoDetailsModal}
-          addFavPhoto={addFavPhoto}
-          removeFavPhoto={removeFavPhoto}
+          toggleFavPhoto={toggleFavPhoto}
         />
       )}
     </div>
